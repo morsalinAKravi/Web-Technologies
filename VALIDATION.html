@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flexbox Layout</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container {
+            display: flex;
+            height: 100vh;
+            border: 2px solid black;
+        }
+        .left {
+            flex: 1;
+            background-color: red;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .form-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+        }
+        .right {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .top-right {
+            flex: 2;
+            background-color: green;
+        }
+        .bottom-right {
+            flex: 1;
+            background-color: yellow;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        input, select {
+            margin-bottom: 10px;
+            padding: 5px;
+        }
+        .gender-container, .terms-container {
+            display: flex;
+            align-items: center;
+        }
+        .gender-container label, .terms-container label {
+            margin-left: 5px;
+        }
+        #email-error {
+            color: red;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left">
+            <div class="form-container">
+                <h2 style="text-align: center; color: rgb(240, 30, 72);">GET REGISTRATION</h2>
+                <form action="/action_page.php" onsubmit="return validateEmail()">
+                    <label for="fname">Full Name:</label>
+                    <input type="text" id="fname" name="fname"><label for="lname">Username:</label>
+                <input type="text" id="lname" name="lname">
+                
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email">
+                <div id="email-error"></div>
+                
+                <label>Gender:</label>
+                <div class="gender-container">
+                    <input type="radio" id="male" name="gender" value="male">
+                    <label for="male">Male</label>
+                    <input type="radio" id="female" name="gender" value="female">
+                    <label for="female">Female</label>
+                </div>
+                
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password">
+                
+                <label for="confirm_password">Confirm Password:</label>
+                <input type="password" id="confirm_password" name="confirm_password">
+                
+                <label for="birthday">Birthday:</label>
+                <input type="date" id="birthday" name="birthday">
+                
+                <label for="location">Location:</label>
+                <select id="location" name="location">
+                    <option>Dhaka</option>
+                    <option>Sylhet</option>
+                    <option>Rajshahi</option>
+                    <option>Rangpur</option>
+                </select>
+                
+                <div class="terms-container">
+                    <input type="checkbox" id="terms">
+                    <label for="terms">Agree with Terms & Conditions</label>
+                </div>
+                
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+    <div class="right">
+        <div class="top-right"></div>
+        <div class="bottom-right"></div>
+    </div>
+</div>
+<script>
+    function validateEmail() {
+        let fname = document.getElementById('fname').value.trim();
+        let lname = document.getElementById('lname').value.trim();
+        let email = document.getElementById('email').value.trim();
+        let password = document.getElementById('password').value;
+        let confirmPassword = document.getElementById('confirm_password').value;
+        let emailError = document.getElementById('email-error');
+        let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        // Reset previous error
+        emailError.textContent = "";
+
+        let isValid = true;
+
+        if (!emailPattern.test(email)) {
+            emailError.textContent = "Invalid email format";
+            isValid = false;
+        }
+
+        if (password !== confirmPassword) {
+            alert("Password and Confirm Password do not match");
+            isValid = false;
+        }
+
+        return isValid;
+    }
+</script>
+
+</body>
+</html> 
